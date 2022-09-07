@@ -39,8 +39,9 @@ As an Ergodox user I couldn't ignore the few flaws of the original design and in
 - Either half can work as a standalone keyboard to be used as a macropad/gaming keyboard.
 - RGB backlighting support.
 - 3D-printer friendly case.
-- Wireless
+- Wireless [see section below](#wireless-implementations)
 - [VIA](https://caniusevia.com/) compatible (thanks to [Harshit Goel](https://github.com/harshitgoel96))
+- [ZMK firmware](https://zmk.dev/) compatible (thanks to [toddmok](https://github.com/toddmok))
 
 ## Related projects
 
@@ -60,22 +61,22 @@ As an Ergodox user I couldn't ignore the few flaws of the original design and in
         - [Redox keyboard case (high profile)](https://www.thingiverse.com/thing:3825752), by [Michele Ferri](https://www.thingiverse.com/sako83/about).
         - [Travel-friendly Redox Keyboard case](https://www.thingiverse.com/thing:3607303), by [Fosk\_LL](https://www.thingiverse.com/Fosk_LL/about).
         - [Redox Neodox case](https://github.com/Pastitas/Redox-neodox-Case), by [Pastitas](https://github.com/Pastitas)
+        - [Redox big battery](https://github.com/marco-silvestri/redox-big-battery), by [Marco Silvestri](https://github.com/marco-silvestri).
 	- Commercially available cases:
 		- [Falbatech's bamboo cases with tilt kit](https://falba.tech/product/redox-standard-lift-bamboo-wood-case-with-oil-finish/)
 		- [Falbatech's fullhand bamboo cases](https://falba.tech/product/redox-fullhand-bamboo-wood-case-with-oil-finish-ver-2/)
-		- [Falbatech's PVC cases](https://falba.tech/product/redox-standard-pvc-white-case/)
 - [**Redox rev1.0W**](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w): the Redox rev 1.0W is the wireless version of the Redox keyboard.
-    - Rev1.0W PCBs: available at [Falbatech's store](https://falba.tech/product/redox-wireless-pcb-electrical-boards-set-of-2/)
+    - Rev1.0W PCBs: gerbers available in [this repo](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w/rev1.0W).
+    - Falbatech's Rev1.0W Hot-swap PCBs: available at [Falbatech's store](https://falba.tech/product/redox-wireless-pcb-electrical-boards-set-of-2/) (Incompatible with the 3D-printable cases down below)
     - Firmware sources:
         - [QMK firmware for Redox wireless](https://github.com/mattdibi/qmk_firmware/tree/master/keyboards/redox_w)
         - [Nordic MCUs firmware for Redox wireless](https://github.com/mattdibi/redox-w-firmware)
 	- 3D-printable cases:
         - [3D printed case](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w/case), freely available.
         - [Redox Neodox case](https://github.com/Pastitas/Redox-neodox-Case), by [Pastitas](https://github.com/Pastitas)
-    - Commercially available cases:
+    - Commercially available cases (only compatible with the Falbatech's store PCBs):
         - [Falbatech's bamboo and aliminium cases](https://falba.tech/product/redox-wireless-standard-lift-bamboo-wood-case-with-oil-finish/)
 		- [Falbatech's fullhand bamboo cases](https://falba.tech/product/redox-wireless-standard-lift-bamboo-wood-case-with-oil-finish-ver-1/)
-		- [Falbatech's PVC cases](https://falba.tech/product/redox-wireless-standard-pvc-white-case/)
 - [**Redox rev2.0WHS**](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w): the Redox rev 2.0WHS is the wireless hot-swappable version of the Redox keyboard.
     - Rev2.0WHS PCBs: gerber files available [here](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w/rev2.0WHS/pcb)
     - Firmware sources:
@@ -83,6 +84,18 @@ As an Ergodox user I couldn't ignore the few flaws of the original design and in
         - [Nordic MCUs firmware for Redox wireless](https://github.com/mattdibi/redox-w-firmware)
 	- 3D-printable case:
         - [3D printed case](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w/rev2.0WHS/case), freely available.
+
+## Wireless implementations
+
+The Redox keyboard uses two different wireless implementations, for simplicity I'll differentiate them on a firmware basis:
+ - *QMK based*: Leveraging the [Gazel protocol](https://developer.nordicsemi.com/nRF5_SDK/nRF51_SDK_v5.x.x/doc/5.2.0/html/a00140.html). It needs its own PCB and a receiver dongle (see [Redox Wireless](https://github.com/mattdibi/redox-keyboard/tree/docs/zmk_update/redox-w) for details) and needs three YJ-14015 MCUs + a Pro Micro compatible controller.
+ - *ZMK based*: Leveraging the Bluetooth protocol. It is based on the [Redox wired PCB](https://github.com/mattdibi/redox-keyboard/tree/master/redox) and the [nice!nano](https://nicekeyboards.com/nice-nano/) controller.
+
+ The main differences for the two implementations are as follows:
+ - _Battery life_: QMK Redox Wireless uses two CR2032 coin cell batteries which last [approximately one year (YMMV)](https://github.com/mattdibi/redox-keyboard/tree/master/redox-w#battery-usage), while the nice!nano support LiPo rechargable batteries (you can choose the capacity you want but expect them to last for a [few weeks on a single charge](https://zmk.dev/power-profiler)).
+ - _Flexibility_: The receiver dongle limits the flexibility of QMK Redox Wireless.
+ - _Cost_: The 3x YJ-14015 + Pro Micro combo is cheaper than the two nice!nano you need for the ZMK Redox.
+ - _Range_: The Bluetooth implementation should be more capable than what can be achieved with the QMK Redox Wireless (At this point in time, I lack the evidence to support these claims though).
 
 ## Layout
 
